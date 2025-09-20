@@ -23,3 +23,4 @@ firebase-debug.log
 firebase-emulator-suite.*
 # Misc
 *.log
+.cache/
