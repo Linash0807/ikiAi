@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const recommendation_routes_1 = __importDefault(require("./recommendation.routes"));
+const chat_routes_1 = __importDefault(require("./chat.routes"));
+const health_routes_1 = __importDefault(require("./health.routes"));
+const knowledge_routes_1 = __importDefault(require("./knowledge.routes"));
+const profile_routes_1 = __importDefault(require("./profile.routes"));
+const roadmap_routes_1 = __importDefault(require("./roadmap.routes"));
+const jobSearch_routes_1 = __importDefault(require("./jobSearch.routes"));
+const test_routes_1 = __importDefault(require("./test.routes"));
+const router = (0, express_1.Router)();
+router.use("/health", health_routes_1.default);
+router.use("/recommendation", recommendation_routes_1.default);
+router.use("/chat", chat_routes_1.default);
+router.use("/knowledge", knowledge_routes_1.default);
+router.use("/profile", profile_routes_1.default);
+router.use("/roadmaps", roadmap_routes_1.default);
+router.use("/jobs", jobSearch_routes_1.default);
+router.use("/test", test_routes_1.default);
+exports.default = router;

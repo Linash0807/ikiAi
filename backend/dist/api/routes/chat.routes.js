@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const verifyAuth_middleware_1 = require("../middlewares/verifyAuth.middleware");
+const chat_controller_1 = require("../controllers/chat.controller");
+const router = (0, express_1.Router)();
+router.get("/sessions", verifyAuth_middleware_1.verifyAuth, chat_controller_1.listUserSessions);
+router.get("/sessions/:sessionId", verifyAuth_middleware_1.verifyAuth, chat_controller_1.getSessionDetails);
+router.post("/sessions/:sessionId/messages", verifyAuth_middleware_1.verifyAuth, chat_controller_1.postChatMessage);
+router.post("/sessions", verifyAuth_middleware_1.verifyAuth, chat_controller_1.startNewSession);
+exports.default = router;
