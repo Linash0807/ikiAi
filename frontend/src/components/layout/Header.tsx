@@ -48,7 +48,7 @@ const Header: React.FC = () => {
               <div className="h-8 w-8 bg-primary-600 rounded-lg flex items-center justify-center">
                 <Briefcase className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-secondary-900">Ikigai AI</span>
+              <span className="text-xl font-bold text-secondary-900">IkiAI  </span>
             </Link>
           </div>
 

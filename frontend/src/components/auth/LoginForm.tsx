@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '../ui/Button';
@@ -14,8 +14,9 @@ interface LoginFormData {
 
 const LoginForm: React.FC = () => {
   const { login, loading } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -25,6 +26,7 @@ const LoginForm: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await login(data.email, data.password);
+      navigate('/dashboard');
     } catch (error) {
       // Error is handled by the auth context
     }

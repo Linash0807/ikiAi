@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '../ui/Button';
@@ -16,9 +16,10 @@ interface RegisterFormData {
 
 const RegisterForm: React.FC = () => {
   const { register: registerUser, loading } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -31,6 +32,7 @@ const RegisterForm: React.FC = () => {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       await registerUser(data.email, data.password, data.fullName);
+      navigate('/login');
     } catch (error) {
       // Error is handled by the auth context
     }

@@ -233,7 +233,7 @@ const Chat: React.FC = () => {
               ) : (
                 messages.map((message, index) => (
                   <div
-                    key={index}
+                    key={message.createdAt ? `${message.role}-${message.createdAt}` : index}
                     className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
@@ -288,26 +288,36 @@ const Chat: React.FC = () => {
 
             {/* Message Input */}
             <div className="p-4 border-t border-secondary-200">
-              <div className="flex space-x-4">
-                <div className="flex-1">
-                  <textarea
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Ask me anything about your career..."
-                    className="w-full rounded-lg border border-secondary-300 px-3 py-2 text-sm placeholder-secondary-400 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 resize-none"
-                    rows={2}
-                    disabled={sendingMessage}
-                  />
+              {currentSession ? (
+                <div className="flex space-x-4">
+                  <div className="flex-1">
+                    <textarea
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Ask me anything about your career..."
+                      className="w-full rounded-lg border border-secondary-300 px-3 py-2 text-sm placeholder-secondary-400 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 resize-none"
+                      rows={2}
+                      disabled={sendingMessage}
+                    />
+                  </div>
+                  <Button
+                    onClick={sendMessage}
+                    disabled={!newMessage.trim() || sendingMessage}
+                    loading={sendingMessage}
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
                 </div>
-                <Button
-                  onClick={sendMessage}
-                  disabled={!newMessage.trim() || sendingMessage}
-                  loading={sendingMessage}
-                >
-                  <Send className="h-4 w-4" />
-                </Button>
-              </div>
+              ) : (
+                <div className="text-center text-secondary-500">
+                  <p className="mb-2">Select or create a chat session to start messaging.</p>
+                  <Button onClick={createNewSession}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Start New Chat
+                  </Button>
+                </div>
+              )}
             </div>
           </>
         ) : (
